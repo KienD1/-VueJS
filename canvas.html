@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+<body>
+    <h1>Vẽ Đường thẳng trong Canvas</h1>
+    <canvas id="myCanvas" width="400" height="100"></canvas>
+    <script>
+        var canvas=document.getElementById('myCanvas');
+        var context = canvas.getContext('2d');
+        context.beginPath();
+        context.moveTo(20,20);
+        context.lineTo(500,30);
+        context.lineWidth = 30;
+        context.strokeStyle = 'red';
+        context.lineCap = 'butt';
+        context.stroke();
+            
+   
+    </script>
+    <canvas id="myCanvas1" width="500" height="200"></canvas>
+    <script>
+        var canvas=document.getElementById('myCanvas1');
+        var context = canvas.getContext('2d');
+        context.beginPath();
+        context.moveTo(40,20);
+        context.lineTo(700,30);
+        context.lineWidth = 30;
+        context.strokeStyle = 'blue';
+        context.lineCap = 'round';
+        context.stroke();
+
+    </script>
+    <canvas id="myCanvas2" width="500" height="200"></canvas>
+    <script>
+        var canvas=document.getElementById('myCanvas2');
+        var context = canvas.getContext('2d');
+        context.beginPath();
+        context.moveTo(60,30);
+        context.lineTo(900,40);
+        context.lineWidth = 30;
+        context.strokeStyle = 'yellow';
+        context.lineCap = 'square';
+        context.stroke();
+    </script>
+    <canvas id="abc" width="300" height="100"></canvas>
+    <script>
+        var canvas=document.getElementById('abc');
+        var context =canvas.getContext('2d');
+        context.beginPath();
+        context.moveTo(70,30);
+        context.lineTo(350,40);
+        context.lineTo(900,10);
+        context.lineTo(7500,100);
+        context.lineWidth = 30;
+        context.strokeStyle = 'black';
+        context.lineCap = 'square';
+        context.stroke();
+    </script>
+</body>
+</html>
