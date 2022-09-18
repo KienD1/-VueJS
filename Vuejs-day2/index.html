@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Study Vue-js day2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/foundation.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- <p>{{ diem }}</p> -->
+        <!-- <button @click="changeLink">Click to change link</button>
+        <a v-bind:href="linkVal">Link</a> -->
+<!-- 
+        <div class="vuong" @click="quanlido = !quanlido" :class="{do: quanlido}"></div>
+        <div class="vuong" :class="{do: quanlido}"></div>
+
+
+
+        <div class="vuong" :class="color"></div>
+        <hr>
+        <input type="text" v-model="color"> -->
+        <!-- <div class="vuong" :style="{backgroundColor: color}"></div>
+        <div class="vuong" :style="customStyles"></div>
+        <div class="vuong" :style="[customStyles, {height: width + 'px'}]"></div>
+        <hr>
+        <input type="text" v-model="color">
+        <input type="text" v-model="width"> -->
+        <!-- <input type="text" v-model="height"> -->
+
+        <!-- <p>You're doctor</p>
+        <p v-if="xacdinh">Yes, I am</p>
+        <p v-else>No,I am a teacher</p>
+        <button @click="xacdinh = !xacdinh">Change condition</button>
+        <template v-if="xacdinh">
+            <div>Menu 1</div>
+            <div>Menu 1</div>
+            <div>Menu 1</div>
+            <div>Menu 1</div>
+            <div>Menu 1</div>
+        </template>
+        <p v-show="xacdinh">Test show element!</p> -->
+        <!-- <ul>
+            <li v-for="(menu,i) in menus">{{ menu }} voi index la : {{ i }}</li>
+        </ul>
+        <template v-for="(menu, index) in menus">
+            <h3>{{ menu }}</h3>
+            <p>{{ index }}</p>
+        </template>
+ -->
+        <!-- <ul>
+            <li v-for="student in students">
+                <div v-for="(value, key, index) in student">{{ key }}: {{ value }} ({{ index}})</div>
+            </li>
+        </ul> -->
+        <!-- <div v-for="n in 10">{{ n }}</div> -->
+
+        <!-- <ul>
+            <li v-for="(menu, i) in menus">{{ menu }} voi index la: {{ i }}</li>
+            <button @click="menus.push('test')">ADD NEW ITEM MENU</button>
+        </ul> -->
+        <section class="row">
+            <div class="small-6 columns">
+                <h1 class="text-center">YOU</h1>
+                <img src="img/chibi.png" alt="" style="height: 500px; width: 100%">
+        
+                <div class="healthbar">
+                    <div class="healthbar text-center" style="background-color: red; margin: 0; color: white;" :style="{width: playerHealth + '%'}">
+                       {{ playerHealth }}
+                    </div>
+                </div>
+            </div>
+            <div class="small-6 columns">
+                <h1 class="text-center">MONSTER</h1>
+                <img src="img/monster.png" alt="" style="height: 500px; width: 100%">
+                    
+                <div class="healthbar">
+                     <div class="healthbar text-center" style="background-color: red; margin: 0; color: white;" :style="{width: monsterHealth + '%'}">
+                       {{ monsterHealth }}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="row controls" v-if="!gameIsRungning">
+            <div class="small-12 columns">
+                <button id="start-game" @click="startNewGame">START NEW GAME</button>
+            </div>
+        </section>
+         <section class="row controls" v-else="">
+            <div class="small-12 columns">
+                <button id="attack" @click="attack">ATTACK</button>
+                <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+                <button id="heal" @click="heal">HEAL</button>
+                <button id="give-up" @click="giveUp">GIVE UP</button>
+            </div>
+        </section>
+        <section class="row log" v-if="turns.length > 0">
+            <div class="small-12 columns">
+                <ul>
+                    <li v-for="turn in turns" :class="{'player-turn': 'turn.isPlayer', 'monster-turn': !turn.isPlayer}">
+                        {{ turn.textLog }}
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+<script src="index.js"></script>
+</html>
