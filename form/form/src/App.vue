@@ -1,178 +1,113 @@
 <template>
-  <div class="container">
-      <form>
-          <div class="row">
-              <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                  <h1>From Section For Trung Kien</h1>
-                  <hr>
-                  <div class="form-group">
-                      <label for="email">Mail</label>
-                      <input
-                              type="text"
-                              id="email"
-                              class="form-control"
-                              :value="userData.email"
-                              @input="userData.email = $event.target.value">       
-                  </div>
-                  <div class="form-group">
-                      <label for="password">Password</label>
-                      <input
-                              type="password"
-                              id="password"
-                              class="form-control"
-                              v-model="userData.password">
-                  </div>
-                  <div class="form-group">
-                      <label for="age">Age</label>
-                      <input
-                              type="number"
-                              id="age"
-                              class="form-control"
-                              v-model="userData.age">
-                  </div>
-
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 form-group">
-                  <label for="message">Message</label><br>
-
-                  <textarea
-                          id="message"
-                          rows="5"
-                          class="form-control"
-                          v-model="message"></textarea>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                  <div class="form-group">
-                      <label for="sendmail">
-                          <input
-                                  type="checkbox"
-                                  id="sendmail"
-                                  value="SendMail"
-                                  v-model="sendEmail"> Send Mail
-                      </label>
-                      <label for="sendInfomail">
-                          <input
-                                  type="checkbox"
-                                  id="sendInfomail"
-                                  value="SendInfoMail"
-                                  v-model="sendEmail"> Send Infomail
-                      </label>
-                      <label for="cutMail">
-                          <input
-                                  type="checkbox"
-                                  id="cutMail"
-                                  value="cutMail"
-                                  v-model="sendEmail"> Cut Mail
-                      </label>
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 form-group">
-                  <label for="male">
-                      <input
-                              type="radio"
-                              id="male"
-                              value="Male"
-                              v-model="gender"> Male
-                  </label>
-                  <label for="female">
-                      <input
-                              type="radio"
-                              id="female"
-                              value="Female"
-                              v-model="gender"> Female
-                  </label>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 from-group">
-                  <label for="priority">Priority</label>
-                  <select
-                          id="priority"
-                          class="form-control"
-                          v-model="selectedPriority">
-                      <option
-                          v-for="item in priorities" 
-                          v-bind:key="item">{{ item }}</option>
-                  </select>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 from-group">
-                 <label for="switched">Switched:</label>
-                 <app-custom
-                    v-model="dataSwitch"></app-custom>
-              </div>
-          </div>
-          <hr>
-          <div class="row">
-              <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                  <button
-                          class="btn btn-primary"
-                          @click.prevent="submited">Submit!
-                  </button>
-              </div>
-          </div>
-      </form>
-      <hr>
-      <div class="row" v-if="isSubmit">
-          <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-              <div class="panel panel-default">
-                  <div class="panel-heading">
-                      <h4>Your Data</h4>
-                  </div>
-                  <div class="panel-body">
-                      <p>Mail: {{ userData.email }}</p>
-                      <p>Password: {{ userData.password}}</p>
-                      <p>Age: {{ userData.age}}</p>
-                      <p style="white-space: pre">Message: {{ message }} </p>
-                      <p><strong>Send Mail?</strong></p>
-                      <ul>
-                          <li v-for="item in sendEmail" v-bind:key="item">{{ item }}</li>
-                      </ul>
-                      <p>Gender: {{ gender }}</p>
-                      <p>Priority:</p>
-                      <p>Switched {{ dataSwitch }}</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+    <div class="container">
+        <div class="row">
+            <!-- <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <h1>Default/ Built-in Directives</h1>
+                <p v-text="'Something else....'"></p>
+                <p v-html="'<h1>This is heading one</h1>'"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <h1>Custom Diectives</h1>
+                <p v-custom:background.delayed="'yellow'">Color style by directives global</p>
+                <p v-local-custom:background.delayed.blink="{mainColor: 'red', secondColor: 'green', delay: 500}">Color style by directives local</p>
+            </div> -->
+            <div class="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+                <h1>Filter & Mixins</h1>
+                <p>{{ text | toLowerCase | to-uppercase}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+                <h3>Filters Products</h3>
+                <button class="btn btn-block btn-success" @click="products.push('Mixins')">Add New Item</button>
+                <input type="text" class="form-control md-md-3" placeholder="Press name product..." v-model="filterProudct">
+                <div class="card" mb-md-3>
+                    <div class="card-body">
+                        <ul>
+                            <li v-for="product in filteredProducts" v-bind:key="product">{{ product}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-list></app-list>
+    </div>
+    
 </template>
-
 <script>
-  import Custom from './components/customcontrol.vue';
-  export default {
-    data () {
-      return {
-        userData: {
-          email: '',
-          password: '',
-          age: 0
-        },
-        message: 'Please hold text something!',
-        sendEmail: [],
-        gender: 'Male',
-        priorities: ['High', 'Medium', 'low'],
-        selectedPriority: 'Low',
-        dataSwitch: true,
-        isSubmit: false
-      }
+import List from './List.vue';
+import { productMixin } from './productMixin.js';
+export default {
+    // components: {
+    // },
+    // directives: {
+    //     'local-custom': {
+    //         bind(el, binding, vnode) {
+    //             var delay = 0;
+    //             if (binding.modifiers['delay']) {
+    //                 delay = 3000;
+    //             }
+    //             if (binding.modifiers['blink']) {
+    //                 let mainColor = binding.value.mainColor;
+    //                 let secondColor = binding.value.secondColor;
+    //                 let currentColor = mainColor;
+    //                 setTimeout(() => {
+    //                     setInterval(() => {
+    //                         currentColor == secondColor
+    //                             ? currentColor = mainColor
+    //                             : currentColor = secondColor;
+    //                         if (binding.arg == 'background') {
+    //                             el.style.backgroundColor = currentColor;
+    //                         } else {
+    //                             el.style.color = currentColor;
+    //                         }
+    //                     }, binding.value.delay)
+    //                 }, delay);
+    //             }
+    //             else {
+    //                 setTimeout(() => {
+    //                     if (binding.arg == 'background') {
+    //                         el.style.backgroundColor = binding.value.mainColor;
+    //                     } else {
+    //                         el.style.color = binding.value.mainColor;
+    //                     }
+    //                 }, delay);
+    //             }
+    //         }
+    //     }
+    // }
+
+
+
+    created() {
+        console.log('Created!')
     },
-    methods: {
-      submited() {
-        this.isSubmit = true
-      }
+    mixins: [productMixin],
+    data() {
+        return {
+            text: 'Hello everyone,Vae JS',
+            // products: ['Iphone', 'SamSung', 'HTC', 'Nokia', 'Noway', 'Bphone'],
+            // filterProudct: ''
+        }
     },
+    filters: {
+        toLowerCase(text) {
+            return text.toLowerCase();
+        }
+    },
+    // computed: {
+    //     filteredProducts() {
+    //         return this.products.filter((element) => {
+    //             return element.match(this.filterProudct);
+    //         })
+    //     }
+    // },
     components: {
-      appCustom: Custom
+        appList: List,
     }
-  }
+}
 </script>
 
 <style>
