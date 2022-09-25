@@ -1,115 +1,208 @@
 <template>
     <div class="container">
         <div class="row">
-            <!-- <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <h1>Default/ Built-in Directives</h1>
-                <p v-text="'Something else....'"></p>
-                <p v-html="'<h1>This is heading one</h1>'"></p>
+            <div class="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 text-center">
+                <h1>Animations</h1>
+                <hr>
+                <select v-model="typeAnimation" class="form-control mb-md-3">
+                    <option value="fade">Fade</option>
+                    <option value="slide">Slide</option>
+                </select>
+                <button class="btn btn-block btn-success" @click="show = !show">Show notifications</button>
+                <br>
+                <br>
+                <transition :name="typeAnimation">
+                    <div class="alert alert-success" v-show="show">This is something about notigications</div>
+                </transition>
+                <transition name="slide">
+                    <div class="alert alert-warning" v-if="show">This is something about notigications</div>
+                </transition>
+                <transition appear enter-class="" enter-active-class="animated bounceOutDown" leave-class=""
+                    leave-active-class="animated hinge">
+                    <div class="alert alert-danger" v-if="show">This is something about notigications</div>
+                </transition>
+                <transition :name="typeAnimation" mode="out-in">
+                    <div class="alert alert-success" v-if="show" key="danger">This is something about notigications from
+                        success</div>
+                    <div class="alert alert-danger" v-else="show" key="success">This is something about notigications
+                        from danger</div>
+                </transition>
+                <hr>
+                <button class="btn btn-success btn-block" @click="status = !status">ADD or Remove</button>
+                <br>
+                <br>
+                <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter"
+                    @enter-cancelled="enterCancelled" @before-leave="beforeLeave" @leave="leave"
+                    @after-leave="afterLeave" @leave-cancelled="leaveCancelled">
+                    <div style="width: 300px; height: 100px; background: lightblue" v-if="status"></div>
+                </transition>
+                <hr>
+                <button class="btn btn-block btn-primary" @click="selectedComponent == 'app-success-alert' ?
+                selectedComponent = 'app-danger-alert' :
+                selectedComponent = 'app-success-alert'
+                "> Submit (toogle 2 notifications)</button>
+                <br>
+                <transition name="fade">
+                    <component :is="selectedComponent"></component>
+                </transition>
+                <hr>
+                <button class="btn btn-block btn-warning"
+                        @click="addItem">Add item</button>
+                <ul class="list-group">
+                    <li class="list-group-item"
+                    v-for="(number, index) in numbers"
+                    v-bind:key="number"
+                    style="cursor: pointer"
+                    @click="removeItem(index)">
+                    {{number}}
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <h1>Custom Diectives</h1>
-                <p v-custom:background.delayed="'yellow'">Color style by directives global</p>
-                <p v-local-custom:background.delayed.blink="{mainColor: 'red', secondColor: 'green', delay: 500}">Color style by directives local</p>
-            </div> -->
-            <div class="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
-                <h1>Filter & Mixins</h1>
-                <p>{{ text | toLowerCase | to-uppercase}}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
-                <h3>Filters Products</h3>
-                <button class="btn btn-block btn-success" @click="products.push('Mixins')">Add New Item</button>
-                <input type="text" class="form-control md-md-3" placeholder="Press name product..." v-model="filterProudct">
-                <div class="card" mb-md-3>
-                    <div class="card-body">
-                        <ul>
-                            <li v-for="product in filteredProducts" v-bind:key="product">{{ product}}</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <app-list></app-list>
     </div>
-    
 </template>
+
 <script>
-import List from './List.vue';
-import { productMixin } from './productMixin.js';
+import DangerAlert from './components/DangerAlert.vue';
+import SuccessAlert from './components/SuccessAlert.vue';
 export default {
-    // components: {
-    // },
-    // directives: {
-    //     'local-custom': {
-    //         bind(el, binding, vnode) {
-    //             var delay = 0;
-    //             if (binding.modifiers['delay']) {
-    //                 delay = 3000;
-    //             }
-    //             if (binding.modifiers['blink']) {
-    //                 let mainColor = binding.value.mainColor;
-    //                 let secondColor = binding.value.secondColor;
-    //                 let currentColor = mainColor;
-    //                 setTimeout(() => {
-    //                     setInterval(() => {
-    //                         currentColor == secondColor
-    //                             ? currentColor = mainColor
-    //                             : currentColor = secondColor;
-    //                         if (binding.arg == 'background') {
-    //                             el.style.backgroundColor = currentColor;
-    //                         } else {
-    //                             el.style.color = currentColor;
-    //                         }
-    //                     }, binding.value.delay)
-    //                 }, delay);
-    //             }
-    //             else {
-    //                 setTimeout(() => {
-    //                     if (binding.arg == 'background') {
-    //                         el.style.backgroundColor = binding.value.mainColor;
-    //                     } else {
-    //                         el.style.color = binding.value.mainColor;
-    //                     }
-    //                 }, delay);
-    //             }
-    //         }
-    //     }
-    // }
-
-
-
-    created() {
-        console.log('Created!')
-    },
-    mixins: [productMixin],
     data() {
         return {
-            text: 'Hello everyone,Vae JS',
-            // products: ['Iphone', 'SamSung', 'HTC', 'Nokia', 'Noway', 'Bphone'],
-            // filterProudct: ''
+            show: true,
+            status: true,
+            elementWidth: 100,
+            alertAnimation: 'fade',
+            typeAnimation: 'fade',
+            selectedComponent: 'app-success-alert',
+            numbers: [1, 2, 3, 4, 5, 6]
         }
     },
-    filters: {
-        toLowerCase(text) {
-            return text.toLowerCase();
+    methods: {
+        beforeEnter: (el) => {
+            console.log("beforeEnter");
+            this.elementWidth = 100;
+            el.style.width = this.elementWidth + 'px';
+        },
+        enter(el, done) {
+            console.log("enter");
+            let point = 1;
+            const interval = setInterval(() => {
+                el.style.width = (this.elementWidth + point * 10 + 'px');
+                point++;
+                if (point > 20) {
+                    clearInterval(interval);
+                    done();
+                }
+            }, 20);
+        },
+        afterEnter(el) {
+            console.log("afterEnter");
+        },
+        enterCancelled(el) {
+            console.log("enterCancelled")
+        },
+        beforeLeave: (el) => {
+            console.log("beforeLeave");
+            this.elementWidth = 300;
+            el.style.width = this.elementWidth + 'px';
+        },
+        leave(el, done) {
+            console.log("leave");
+            console.log("enter");
+            let point = 1;
+            const interval = setInterval(() => {
+                el.style.width = (this.elementWidth - point * 10 + 'px');
+                point++;
+                if (point > 20) {
+                    clearInterval(interval);
+                    done();
+                }
+            }, 20);
+
+        },
+        afterLeave(el) {
+            console.log("afterLeave");
+        },
+        leaveCancelled(el) {
+            console.log("leaveCancelled")
+        },
+        addItem() {
+            const pos = Math.floor(Math.ramdom() * this.numbers.length);
+            this.numbers.splice(pos, 0, this.number.length + 1);
+        },
+        removeItem(pos) {
+            this.numbers.splice(pos, 1);
         }
     },
-    // computed: {
-    //     filteredProducts() {
-    //         return this.products.filter((element) => {
-    //             return element.match(this.filterProudct);
-    //         })
-    //     }
-    // },
     components: {
-        appList: List,
+        appDangerAlert: DangerAlert,
+        appSuccessAlert: SuccessAlert,
     }
 }
 </script>
 
 <style>
+/* enter */
+.fade-enter {
+    opacity: 0;
+}
 
+.fade-enter-active {
+    transition: opacity 1s;
+
+}
+
+
+/* leave */
+.fade-leave {
+    opacity: 1;
+}
+
+.fade-leave-active {
+    transition: opacity 1s;
+    opacity: 0;
+}
+
+
+/* Slide transition effect */
+/* enter */
+.slide-enter {
+    opacity: 0;
+}
+
+.slide-enter-active {
+    transition: opacity 1s;
+    animation: slide-in 1s ease-out forwards;
+}
+
+/* leave */
+.slide-leave {}
+
+.slide-leave-active {
+    opacity: 0;
+    transition: opacity 1s;
+    ;
+    animation: slide-out 1s forwards;
+}
+
+/* key frames */
+@keyframes slide-in {
+    from {
+        transform: translateY(20px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(20px);
+    }
+}
 </style>
