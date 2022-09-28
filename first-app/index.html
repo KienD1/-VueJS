@@ -8,11 +8,38 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body>
-    <div id="obj">
-        <input type="text" v-on:input="changeValue">
+    <!-- <div id="obj"> -->
+        <!-- <input type="text" v-on:input="changeValue">
         <p>{{ noidung }}</p>
-    </div>
+        <p>{{ sayHello() }}</p>
+        <p>{{ showPost() }}</p>
+        <a v-bind:href="link">My Facebook</a>
+        <p v-once>{{ noidung }} - {{ update() }}</p>
+        <p v-html="testMaHTML"></p> -->
+        <!-- <div v-on:mouseover="tinhtoado">
+            <h1>Bam nut de tang gia tri</h1>
+            <button v-on:click="tangGiaTri">An di</button>
+            <button v-on:click="dem++">An di (viet truc tiep Js trong template cua VueJS)</button>
+            <p>Gia tri: {{ dem }}</p>
+            <p>Gia tri: {{ dem > 20 ? 'Ban da vuot qua gioi han' : 'Ban van nam trong gioi han'}}</p>
+            <p>Toa do cua chuot hien tai: {{ x }} / {{ y }}</p>
+            <span v-on:mouseove.stop="">dung su kien do toa do chuot</span>
+        </div>
 
+        <div>
+            <input type="text" @keyup.enter.space="banphim">
+        </div>
+    </div> -->
+<div id="app">
+    <input type="text" v-model="name">
+    <p>{{ name }}</p>
+    <p>Gia tri A: {{ tanga }}</p>
+    <p>Gia tri B: {{ tangb }}</p>
+    <p>Gia tri A: {{ tangaf() }}</p>
+    <p>Gia tri B: {{ tangbf() }}</p>
+    <button v-on:click="a++">Tang a</button>
+    <button v-on:click="b++">Tang b</button>
+</div>
 </body>
 <script src="index.js"></script>
 </html>
